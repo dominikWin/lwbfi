@@ -1,0 +1,7 @@
+# Swap
+*~
+*.swp
+
+# C
+*.o
+lwbfi
