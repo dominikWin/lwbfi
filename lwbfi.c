@@ -15,7 +15,6 @@ char gc(int icp) {
 	if(!n)
 		exit(EXIT_SUCCESS);
 }
-
 void run_std() {
 	if(c == '+')
 		array[cp] = array[cp] + 1;
@@ -26,15 +25,35 @@ void run_std() {
 	if(c == '<')
 		cp--;
 	if(c == '.')
-		putchar((char) array[cp]);
+		printf("%c", array[cp]);
 	if(c == ',')
 		array[cp] = getchar();
 }
 
 void run() {
+	int ret = ip;
 	while(1) {
 		gc(ip);
+//		printf("OUT: %c, ip %d\n", c, ip);
 		run_std();
+		if(c == '[') {
+			ip++;
+//			printf("FORK\n");
+			run();
+			continue;
+		}
+		if(c == ']') {
+			if(0 != array[cp]) {
+				ip = ret;
+//				printf("RET (cell %d, val %d, ip %d)\n", cp, array[cp], ip);
+				continue;
+			}
+			else {
+				ip++;
+//				printf("EXT (cell %d, val %d, ip %d)\n", cp, array[cp], ip);
+				return;
+			}
+		}
 		ip++;
 	}
 }
