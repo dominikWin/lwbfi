@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <unistd.h>
 
-typedef int32_t cell_t;
+typedef uint8_t cell_t;
 cell_t *array;
 int fd, ip = 0, cp = 0;
 char c;
